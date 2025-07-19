@@ -17,29 +17,23 @@
     </style>
 </head>
 <body>
-    <h2>고정 확장자</h2>
-    <label><input type="checkbox" class="fixed-ext" value="bat"> bat</label>
-    <label><input type="checkbox" class="fixed-ext" value="cmd"> cmd</label>
-    <label><input type="checkbox" class="fixed-ext" value="com"> com</label>
-    <label><input type="checkbox" class="fixed-ext" value="cpl"> cpl</label>
-    <label><input type="checkbox" class="fixed-ext" value="exe"> exe</label>
-    <label><input type="checkbox" class="fixed-ext" value="scr"> scr</label>
-    <label><input type="checkbox" class="fixed-ext" value="js"> js</label>
+<h2>고정 확장자</h2>
+<div id="fixed-ext-container">
+    <!-- JS에서 고정 확장자 체크박스 생성 -->
+</div>
 
-    <h2>커스텀 확장자</h2>
-    <input type="text" id="custom-ext-input" placeholder="확장자 입력" maxlength="20">
-    <button id="add-custom-ext">+추가</button>
+<h2>커스텀 확장자</h2>
+<input type="text" id="custom-ext-input" placeholder="확장자 입력" maxlength="20">
+<button id="add-custom-ext">+추가</button>
 
-    <div class="extension-box">
-        <div>
-            <span id="ext-count">현재 존재하는 확장자 개수: 3 / 총 200</span>
-        </div>
-        <div id="custom-ext-list"></div>
-        <div style="margin-top: 10px;">
-            <button name="sh">sh</button>
-            <button name="ju">ju</button>
-            <button name="ch">ch</button>
-        </div>
+<div class="extension-box">
+    <div>
+        <span id="ext-count">현재 개수 : 0 / 총 개수 : 200 </span>
     </div>
+    <div id="custom-ext-list"></div>
+    <div id="dynamic-buttons" style="margin-top: 10px;"></div>
+</div>
+
+<script src="../static/file-extension.js"></script>
 </body>
 </html>
