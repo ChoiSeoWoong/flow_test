@@ -27,6 +27,17 @@ public class FileExtension {
     @Enumerated(EnumType.STRING)
     private FileExtensionFormat fileExtensionFormat;
 
+    @Column
+    private Boolean checked = false;
+
     @CreatedDate
     private LocalDateTime createdAt;
+
+    public void setCheckedTrue() {
+        this.checked = true;
+    }
+
+    public void setCheckedFalse() {
+        this.checked = false;
+    }
 }
