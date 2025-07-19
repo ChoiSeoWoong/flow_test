@@ -1,10 +1,13 @@
 package com.example.flow_test.file.controller;
 
 import com.example.flow_test.file.dto.FileCustomExtensionRequest;
+import com.example.flow_test.file.dto.FileExtensionResponse;
 import com.example.flow_test.file.service.FileExtensionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -12,26 +15,28 @@ import org.springframework.web.bind.annotation.*;
 public class FileExtensionController {
     private final FileExtensionService fileExtensionService;
 
-//    @GetMapping("/fix/all")
-//    public ResponseEntity<?> getFixExtensionName() {
-//        fileExtensionService.
-//    }
-//
-//    @GetMapping("/custom/all")
-//    public ResponseEntity<?> getCustomExtensionName() {
-//
-//    }
+    @GetMapping("/fix/all")
+    public ResponseEntity<List<FileExtensionResponse>> getFixExtensionName() {
+        List<FileExtensionResponse> responses = fileExtensionService.getFixExtensionName();
+        return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/custom/all")
+    public ResponseEntity<List<FileExtensionResponse>> getCustomExtensionName() {
+        List<FileExtensionResponse> responses = fileExtensionService.getCustomExtensionName();
+        return ResponseEntity.ok(responses);
+    }
 
     @PostMapping("/fix")
-    public ResponseEntity<Void> inputFixExtensionName(@RequestParam("fileExtensionName") String fileExtensionName) {
-        fileExtensionService.inputFixExtensionName(fileExtensionName);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Long> inputFixExtensionName(@RequestParam("fileId") Long fileId) {
+        Long responseFileId = fileExtensionService.inputFixExtensionName(fileId);
+        return ResponseEntity.ok().body(responseFileId);
     }
 
     @PostMapping("/custom")
-    public ResponseEntity<Void> inputCustomExtensionName(@RequestBody FileCustomExtensionRequest request) {
-        fileExtensionService.inputCustomExtensionName(request);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Long> inputCustomExtensionName(@RequestBody FileCustomExtensionRequest request) {
+        Long fileId = fileExtensionService.inputCustomExtensionName(request);
+        return ResponseEntity.ok().body(fileId);
     }
 
     @DeleteMapping("/fix/{fileId}")
