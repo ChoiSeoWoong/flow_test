@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
     // CustomException
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<?> handleCustomException(CustomException e) {
-        log.error("log info : {}", e.getErrorCode().getErrorReason());
+        log.error("log info : ", e);
 
         ErrorCode code = e.getErrorCode();
         ErrorResponse response = ErrorResponse.builder()
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     // ServerException
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleException(Exception e) {
-        log.error("log info : {}", e.getMessage());
+        log.error("log info : ", e);
 
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
