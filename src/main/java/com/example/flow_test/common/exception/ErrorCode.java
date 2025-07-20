@@ -14,6 +14,7 @@ public enum ErrorCode {
     EXCEED_CUSTOM_FILE_EXTENSION_NAME_LIST_SIZE(400, "커스텀 확장자를 더이상 추가할 수 없습니다. 최대 200개까지 추가할 수 있습니다."),
     DUPLICATED_FILE_EXTENSION_NAME(400, "중복된 커스텀 파일 확장자입니다."),
     FILE_EXTENSION_NOT_FOUND(404, "해당 확장자 명을 찾을 수 없습니다."),
+    FILE_EXTENSION_NAME_SHOULD_NOT_HAVE_SPACE(400, "공백은 존재할 수 없습니다."),
 
     /**
      * Server error
