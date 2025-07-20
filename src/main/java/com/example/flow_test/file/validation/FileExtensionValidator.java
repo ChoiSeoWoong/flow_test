@@ -21,4 +21,8 @@ public class FileExtensionValidator {
     public boolean validateCustomFileExtensionListMaxSize(int fileExtensionListSize) {
         return fileExtensionListSize <= CUSTOM_FILE_EXTENSION_LIST_MAX_SIZE;
     }
+
+    public boolean validateCustomFileExtensionNameHasSpace(String fileExtensionName) {
+        return fileExtensionName.contains(" ");
+    }
 }

@@ -70,6 +70,10 @@ public class FileExtensionService {
             throw new CustomException(ErrorCode.EXCEED_CUSTOM_FILE_EXTENSION_NAME_LIST_SIZE);
         }
 
+        if(fileExtensionValidator.validateCustomFileExtensionNameHasSpace(fileExtensionName)) {
+            throw new CustomException(ErrorCode.FILE_EXTENSION_NAME_SHOULD_NOT_HAVE_SPACE);
+        }
+
         FileExtension fileExtension = FileExtension.builder()
                 .fileExtensionName(fileExtensionName)
                 .fileExtensionFormat(FileExtensionFormat.CUSTOM)

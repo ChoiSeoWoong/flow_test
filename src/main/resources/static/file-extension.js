@@ -3,7 +3,7 @@ $(document).ready(function () {
     let currentCount = 0;
     const customExtensions = {};
 
-    $.get("http://localhost:8080/api/file-extension/fix/all", function (data) {
+    $.get("http://4.218.11.230:8080/api/file-extension/fix/all", function (data) {
         const container = $('#fixed-ext-container');
         data.forEach(ext => {
             const checkbox = $(`
@@ -30,7 +30,7 @@ $(document).ready(function () {
                 return;
             }
 
-            $.post("http://localhost:8080/api/file-extension/fix", { fileId: fileId })
+            $.post("http://4.218.11.230:8080/api/file-extension/fix", { fileId: fileId })
                 .done(function () {
                     console.log("등록 완료: fileId = " + fileId);
                 })
@@ -43,7 +43,7 @@ $(document).ready(function () {
             }
 
             $.ajax({
-                url: "http://localhost:8080/api/file-extension/fix/" + fileId,
+                url: "http://4.218.11.230:8080/api/file-extension/fix/" + fileId,
                 type: "DELETE",
                 success: function () {
                 },
@@ -54,7 +54,7 @@ $(document).ready(function () {
         }
     });
 
-    $.get("http://localhost:8080/api/file-extension/custom/all", function (data) {
+    $.get("http://4.218.11.230:8080/api/file-extension/custom/all", function (data) {
         data.forEach(ext => {
             renderCustomExtension(ext.fileExtensionName, ext.fileId);
         });
@@ -71,11 +71,24 @@ $(document).ready(function () {
     // 3. 커스텀 확장자 추가
     $('#add-custom-ext').on('click', function () {
         const inputVal = $('#custom-ext-input').val().trim();
+        const hasSpecialChar = /[^a-zA-Z0-9]/.test(inputVal);
+
         if (!inputVal) return;
         if (inputVal.length > 20) {
             alert("확장자는 20자 이하로 입력해주세요.");
             return;
         }
+
+        if(inputVal.includes(' ')) {
+            alert("공백은 포함할 수 없습니다.");
+            return;
+        }
+
+        if(hasSpecialChar) {
+            alert("특수 문자 및 한글은 사용할 수 없습니다.");
+            return;
+        }
+
         if (customExtensions[inputVal]) {
             alert("이미 존재하는 확장자입니다.");
             return;
@@ -86,7 +99,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: "http://localhost:8080/api/file-extension/custom",
+            url: "http://4.218.11.230:8080/api/file-extension/custom",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({
@@ -112,7 +125,7 @@ $(document).ready(function () {
         const fileId = extItem.data('id');
 
         $.ajax({
-            url: "http://localhost:8080/api/file-extension/custom/" + fileId,
+            url: "http://4.218.11.230:8080/api/file-extension/custom/" + fileId,
             type: "DELETE",
             success: function () {
                 delete customExtensions[extName];
